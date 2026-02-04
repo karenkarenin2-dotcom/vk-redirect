@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
+
   <title>VK Redirect</title>
+
 </head>
+
 <body>
+
 <script>
+
   if (window.location.hash.includes("access_token")) {
-    const fullUrl = window.location.href;
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbziYScAuifWFhjz64FU7nxInUqjafd4xyZ9ifUKI0E9WH6L5oVtwxCGetMdlvElO-xM6Q/exec?url=" + encodeURIComponent(fullUrl);
-    window.location.href = scriptUrl;
+
+    const token = window.location.hash.match(/access_token=([^&]+)/)[1];
+
+    window.location.href = "https://script.google.com/macros/s/AKfycbziYScAuifWFhjz64FU7nxInUqjafd4xyZ9ifUKI0E9WH6L5oVtwxCGetMdlvElO-xM6Q/exec?access_token=" + token;
+
+  } else {
+
+    document.write("Ошибка: нет токена VK");
+
   }
+
 </script>
+
 </body>
+
 </html>
-
-
