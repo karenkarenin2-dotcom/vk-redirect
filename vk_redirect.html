@@ -6,11 +6,15 @@
 </head>
 <body>
 <script>
-  if (window.location.hash.includes("access_token")) {
-    const token = window.location.hash.match(/access_token=([^&]+)/)[1];
-    window.location.href = "https://script.google.com/macros/s/AKfycbwE_54kkTT01NSslTaKCayGdiFLqAoGChxmyrgLalCYohO3gv1K_JfKp572YQFcgpEplQ/exec?access_token=" + token;
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+
+  if (code) {
+    // Отправляем code на Apps Script
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbwE_54kkTT01NSslTaKCayGdiFLqAoGChxmyrgLalCYohO3gv1K_JfKp572YQFcgpEplQ/exec?code=" + encodeURIComponent(code);
+    window.location.href = scriptUrl;
   } else {
-    document.write("Ошибка: нет токена VK");
+    document.body.innerHTML = "<h3>Ошибка: код авторизации не получен</h3>";
   }
 </script>
 </body>
