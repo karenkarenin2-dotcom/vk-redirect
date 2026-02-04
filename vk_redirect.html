@@ -6,16 +6,12 @@
 </head>
 <body>
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code');
-
-  if (code) {
-    // Отправляем code на Apps Script
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbwE_54kkTT01NSslTaKCayGdiFLqAoGChxmyrgLalCYohO3gv1K_JfKp572YQFcgpEplQ/exec?code=" + encodeURIComponent(code);
+  if (window.location.hash.includes("access_token")) {
+    const fullUrl = window.location.href;
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbwE_54kkTT01NSslTaKCayGdiFLqAoGChxmyrgLalCYohO3gv1K_JfKp572YQFcgpEplQ/exec?url=" + encodeURIComponent(fullUrl);
     window.location.href = scriptUrl;
-  } else {
-    document.body.innerHTML = "<h3>Ошибка: код авторизации не получен</h3>";
   }
 </script>
 </body>
 </html>
+
